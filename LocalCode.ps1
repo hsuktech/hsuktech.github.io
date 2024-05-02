@@ -14,13 +14,13 @@ param(
     #$sharedSecret = ""
     #$webhookUri = ""
 
-    if(Test-Path variable:global:webhookUri){
+    if($webhookUri -eq $null){
     # Do nothing
     } else { 
         $webhookUri = Read-Host "Webhook Uri"
     }
     
-    if(Test-Path variable:global:sharedSecret){
+    if($sharedSecret){
         # Do nothing
     } else { 
         $sharedSecret = Read-Host "Shared Secret"
