@@ -14,18 +14,6 @@ param(
     #$sharedSecret = ""
     #$webhookUri = ""
 
-    if($webhookUri -eq $null){
-    # Do nothing
-    } else { 
-        $webhookUri = Read-Host "Webhook Uri"
-    }
-    
-    if($sharedSecret){
-        # Do nothing
-    } else { 
-        $sharedSecret = Read-Host "Shared Secret"
-    }
-
     $body = @"
     {
         "`$sharedSecret": "$sharedSecret", 
