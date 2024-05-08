@@ -4,8 +4,8 @@ cls
 iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/LocalCode.ps1)
 
 # Set the variables
-$sharedSecret = Read-Host "Shared Secret"
 $webhookUri = Read-Host "Webhook Uri"
+$sharedSecret = Read-Host "Shared Secret"
 
 # Run the code
 
