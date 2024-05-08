@@ -1,4 +1,4 @@
-iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/LocalCode.ps1)
+iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch.ps1)
 
 if(Test-Path variable:global:webhookUri){
     # Do nothing
@@ -13,4 +13,4 @@ if(Test-Path variable:global:sharedSecret){
 }
 
 $scriptName = Read-Host "Script"
-RunLocalCode -scriptName $scriptName -sharedSecret $sharedSecret -webhookUri $webhookUri
+CodeFetch -scriptName $scriptName -sharedSecret $sharedSecret -webhookUri $webhookUri
