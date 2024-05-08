@@ -13,4 +13,4 @@ if(Test-Path variable:global:sharedSecret){
 }
 
 $scriptName = Read-Host "Script"
-CodeFetch -scriptName $scriptName -sharedSecret $sharedSecret -webhookUri $codeFetchUri
+CodeFetch -scriptName $scriptName -sharedSecret $sharedSecret -codeFetchUri $codeFetchUri
