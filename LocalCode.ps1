@@ -25,7 +25,7 @@ param(
 
     # Azure SQL on HSUK with query
     $result = Invoke-WebRequest -Method Post -Uri "$webhookUri" `
-        -Headers @{'Content-Type' = 'application/json'} -Body $body
+        -Headers @{'Content-Type' = 'application/json'} -Body $body -UseBasicParsing
 
     #$result
     $result = $result | ConvertFrom-Json
@@ -34,7 +34,7 @@ param(
     $url
 
     do {
-        $response = Invoke-WebRequest -Uri $url -Method Get -MaximumRedirection 0
+        $response = Invoke-WebRequest -Uri $url -Method Get -MaximumRedirection 0 -UseBasicParsing
         $status = ($response.Content | ConvertFrom-Json).status
         if($status -ne "Completed"){
             continue
