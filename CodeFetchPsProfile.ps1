@@ -10,4 +10,4 @@ $sharedSecret = Read-Host "Shared Secret"
 # Fetch the code
 
 # Create standard PowerShell profile for the current user 
-CodeFetch -scriptName Maintenance-CreatePsProfile.ps1 -sharedSecret $sharedSecret -webhookUri $webhookUri
+CodeFetch -scriptName ReACKs-CodeFetchPsProfile.ps1 -sharedSecret $sharedSecret -webhookUri $webhookUri
