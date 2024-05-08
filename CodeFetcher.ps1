@@ -3,7 +3,7 @@ iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/Code
 if(Test-Path variable:global:webhookUri){
     # Do nothing
 } else { 
-    $webhookUri = Read-Host "Webhook Uri"
+    $codeFetchUri = Read-Host "Code Fetch Uri"
 }
 
 if(Test-Path variable:global:sharedSecret){
@@ -13,4 +13,4 @@ if(Test-Path variable:global:sharedSecret){
 }
 
 $scriptName = Read-Host "Script"
-CodeFetch -scriptName $scriptName -sharedSecret $sharedSecret -webhookUri $webhookUri
+CodeFetch -scriptName $scriptName -sharedSecret $sharedSecret -webhookUri $codeFetchUri
