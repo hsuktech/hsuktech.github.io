@@ -1,7 +1,7 @@
 if(Test-Path variable:global:webhookUri){
     # Do nothing
 } else { 
-    $webhookUri = Read-Host "Webhook Uri"
+    $codeFetchUri = Read-Host "Code Fetch Uri"
 }
 
 if(Test-Path variable:global:sharedSecret){
