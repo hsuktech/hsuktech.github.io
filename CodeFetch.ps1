@@ -7,7 +7,7 @@ param(
     [string[]] $sharedSecret,
 
     [Parameter(Position=2, Mandatory=$true)]
-    [string[]] $webhookUri
+    [string[]] $codeFetchUri
     )
 
     #$scriptName = ""
@@ -24,7 +24,7 @@ param(
     $body
 
     # Azure SQL on HSUK with query
-    $result = Invoke-WebRequest -Method Post -Uri "$webhookUri" `
+    $result = Invoke-WebRequest -Method Post -Uri "$codeFetchUri" `
         -Headers @{'Content-Type' = 'application/json'} -Body $body
 
     #$result
