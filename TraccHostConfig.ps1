@@ -10,6 +10,7 @@ function Show-Menu
     
     Write-Host "1: Press '1' to run stage 1."
     Write-Host "2: Press '2' to run stage 2."
+    Write-Host "3: Press '3' to run stage 3."
     Write-Host "Q: Press 'Q' to quit."
 }
 
@@ -62,7 +63,7 @@ switch ($selection)
 
           # Cloudflared setup
           CodeFetch -scriptName TRACC-CloudflaredSetup.ps1 -sharedSecret $sharedSecret -codeFetchUri $codeFetchUri
-
+   } '3' {   
           # Run VMEditor.exe
           CodeFetch -scriptName TRACC-VMEditor.ps1 -sharedSecret $sharedSecret -codeFetchUri $codeFetchUri
 
