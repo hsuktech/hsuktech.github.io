@@ -7,13 +7,13 @@ param(
     [string[]] $sharedSecret,
 
     [Parameter(Position=2, Mandatory=$true)]
-    [string[]] $codeFetchUri
+    [string[]] $codeFetchUri,
+
+    [Parameter(Position=3, Mandatory=$false)]
+    [switch]$saveLocal
     )
 
-    #$scriptName = ""
-    #$sharedSecret = ""
-    #$webhookUri = ""
-
+    # Build JSON to send
     $body = @"
     {
         "`$sharedSecret": "$sharedSecret", 
@@ -21,9 +21,7 @@ param(
     }
 "@
 
-    $body
-
-    # Azure SQL on HSUK with query
+    # Request webhook
     $result = Invoke-WebRequest -Method Post -Uri "$codeFetchUri" `
         -Headers @{'Content-Type' = 'application/json'} -Body $body
 
@@ -31,8 +29,7 @@ param(
     $result = $result | ConvertFrom-Json
     $url = $result.resultUrl
 
-    $url
-
+    # Loop until status is complete
     do {
         $response = Invoke-WebRequest -Uri $url -Method Get -MaximumRedirection 0
         $status = ($response.Content | ConvertFrom-Json).status
@@ -40,22 +37,17 @@ param(
             continue
         }
         else{
-            #Write-Output $response
             break
         }
     } while ($true)
 
+    # Get result
     $response = $response.Content | ConvertFrom-Json
     $code = $response.data.results.tasks.result 
     
-    # Save script as local file
-    #$scriptText = $code.ScriptText
-    #$scriptText | Out-File "C:\Assets\Automation\Temp\$scriptName"
-
-    Invoke-Expression $code.ScriptText
-    
-    # This doesn't work
-    #Start-Process powershell.exe -ArgumentList "-Command "Invoke-Command -FilePath C:\Assets\Automation\Temp\$scriptName"" `
-    #    -WindowStyle Hidden -PassThru -Wait -RedirectStandardOutput "C:\Assets\Automation\Logs\$scriptName.txt"   
-        
+    if($saveLocal){
+        # DO NOTHING
+    } else {
+        Invoke-Expression $code.ScriptText
+    }  
 }
