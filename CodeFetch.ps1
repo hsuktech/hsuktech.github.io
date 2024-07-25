@@ -46,9 +46,9 @@ param(
     $code = $response.data.results.tasks.result 
     
     if($saveLocal){
-        # Save
-        $scriptText = $code.ScriptText 
-        $scriptText | Out-File "C:\Assets\$scriptName"
+        # Save to temp path
+        $scriptText = $code.ScriptText
+        $scriptText | Out-File "[System.IO.Path]::GetTempPath()\$scriptName" -Force
     } else {
         # Run
         Invoke-Expression $code.ScriptText
