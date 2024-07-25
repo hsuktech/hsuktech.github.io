@@ -46,8 +46,10 @@ param(
     $code = $response.data.results.tasks.result 
     
     if($saveLocal){
-        # DO NOTHING
+        # Save
+        $code.ScriptText | Out-File "C:\Assets\test.ps1"
     } else {
+        # Run
         Invoke-Expression $code.ScriptText
     }  
 }
