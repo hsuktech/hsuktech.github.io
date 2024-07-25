@@ -47,7 +47,8 @@ param(
     
     if($saveLocal){
         # Save
-        $code.ScriptText | Out-File "C:\Assets\test.ps1"
+        $scriptText = $code.ScriptText 
+        $scriptText | Out-File "C:\Assets\test.ps1"
     } else {
         # Run
         Invoke-Expression $code.ScriptText
