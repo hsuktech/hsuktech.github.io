@@ -48,7 +48,8 @@ param(
     if($saveLocal){
         # Save to temp path
         $scriptText = $code.ScriptText
-        $scriptText | Out-File "[System.IO.Path]::GetTempPath()\$scriptName" -Force
+        $scriptPath = [System.IO.Path]::GetTempPath()
+        $scriptText | Out-File "$scriptPath\$scriptName" -Force
     } else {
         # Run
         Invoke-Expression $code.ScriptText
