@@ -12,7 +12,8 @@ function Add-FileToAzureFileShareAndGenerateSAS {
         [string]$localFilePath,
         [string]$filePathInShare,
         [int]$sasExpiryInHours = 4,  # SAS token expiry time in hours (default is 4 hours)
-        [switch]$toClipboard
+        [switch]$toClipboard, # Copy the SAS uri to the clipboard
+        [switch]$toBase64 # Base64 encode the SAS uri and copy to clipboard
     )
 
     # Authenticate
@@ -51,6 +52,10 @@ function Add-FileToAzureFileShareAndGenerateSAS {
 
     if($toClipboard){
         $sasUri | Set-Clipboard
+    } elseif($toBase64){
+        $sasUri = Get-EncodedBase64 $sasUri
+        $sasUri | Set-Clipboard
+        Write-Host "Base64 Encoded: $sasUri"
     } else {
         return $sasUri
     }
@@ -61,6 +66,7 @@ function Add-FileToAzureFileShareAndGenerateSAS {
 #                                                    -resourceGroupName "" `
 #                                                    -fileShareName "" `
 #                                                    -localFilePath "" `
-#                                                    -filePathInShare " `
-#                                                    -sasExpiryInHours ""
-#                                                    -toClibpoard
+#                                                    -filePathInShare "" `
+#                                                    -sasExpiryInHours "" `
+#                                                    -toClibpoard `
+#                                                    -toBase64
