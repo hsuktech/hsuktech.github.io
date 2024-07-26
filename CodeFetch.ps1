@@ -55,7 +55,8 @@ param(
         $scriptText | Out-File "$scriptPath\$scriptName" -Force
 
         if($dotSource){
-            $fullScriptPath = " $scriptPath\$scriptName" 
+            $fullScriptPath = "$scriptPath\$scriptName" 
+            $fullScriptPath
             . $fullScriptPath
         }
     } else {
