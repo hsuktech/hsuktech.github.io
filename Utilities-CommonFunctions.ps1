@@ -19,6 +19,7 @@ function Get-Confirmation {
     }
 }
 
+# Encode a string to Base64
 function Get-EncodedBase64 {
     param (
         [string]$text
@@ -29,6 +30,7 @@ function Get-EncodedBase64 {
     return $encodedText
 }
 
+# Decode a string to Base64
 function Get-DecodedBase64 {
     param (
         [string]$text

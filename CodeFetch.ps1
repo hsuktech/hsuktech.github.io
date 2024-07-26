@@ -10,7 +10,10 @@ param(
     [string[]] $codeFetchUri,
 
     [Parameter(Position=3, Mandatory=$false)]
-    [switch]$saveLocal
+    [switch]$saveLocal,
+
+    [Parameter(Position=4, Mandatory=$false)]
+    [switch]$dotSource
     )
 
     # Build JSON to send
@@ -50,6 +53,10 @@ param(
         $scriptText = $code.ScriptText
         $scriptPath = [System.IO.Path]::GetTempPath()
         $scriptText | Out-File "$scriptPath\$scriptName" -Force
+
+        if($dotSource){
+            . .\$scriptPath\$scriptName
+        }
     } else {
         # Run
         Invoke-Expression $code.ScriptText
