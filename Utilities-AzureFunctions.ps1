@@ -1,5 +1,8 @@
 # This script contains several useful Azure functions that can be sourced and used from other scripts
 
+# Load supporting common functions
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/Utilities-CommonFunctions.ps1'))
+
 # Upload a single file to Azure File Share and generate a SAS with a default expiry of 4 hours. Authentication is a Managed Identity
 function Add-FileToAzureFileShareAndGenerateSAS {
     param (
