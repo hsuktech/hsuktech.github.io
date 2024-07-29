@@ -59,6 +59,9 @@ param(
             #$fullScriptPath
             #. $fullScriptPath
             return $fullScriptPath
+
+            $scriptBlock = [scriptblock]::Create(". $fullScriptPath")
+            & $scriptBlock
         }
     } else {
         # Run
