@@ -65,3 +65,5 @@ param(
         Invoke-Expression $code.ScriptText
     }  
 }
+
+. $fullScriptPath
