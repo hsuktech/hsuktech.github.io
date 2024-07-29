@@ -53,16 +53,12 @@ param(
         $scriptText = $code.ScriptText
         $scriptPath = [System.IO.Path]::GetTempPath()
         $scriptText | Out-File "$scriptPath\$scriptName" -Force
+        $fullScriptPath = "$scriptPath$scriptName" 
 
-        if($dotSource){
-            $fullScriptPath = "$scriptPath$scriptName" 
-            #$fullScriptPath
-            #. $fullScriptPath
-            #return $fullScriptPath
+        return $fullScriptPath
 
-            $scriptBlock = [scriptblock]::Create(". $fullScriptPath")
-            & $scriptBlock
-        }
+    } elseif ($dotSource){
+        return $code.ScriptText
     } else {
         # Run
         Invoke-Expression $code.ScriptText
