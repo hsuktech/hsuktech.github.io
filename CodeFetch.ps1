@@ -57,7 +57,7 @@ param(
         if($dotSource){
             $fullScriptPath = "$scriptPath$scriptName" 
             $fullScriptPath
-            . $fullScriptPath
+            & . $fullScriptPath
         }
     } else {
         # Run
