@@ -58,7 +58,7 @@ param(
             $fullScriptPath = "$scriptPath$scriptName" 
             #$fullScriptPath
             #. $fullScriptPath
-            return $fullScriptPath
+            #return $fullScriptPath
 
             $scriptBlock = [scriptblock]::Create(". $fullScriptPath")
             & $scriptBlock
