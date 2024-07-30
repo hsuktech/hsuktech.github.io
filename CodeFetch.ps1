@@ -65,6 +65,8 @@ param(
         return $decodedCodeContent
     } else {
         # Run
-        Invoke-Expression $code.ScriptText
+        $decodedCodeBytes = [Convert]::FromBase64String($code)
+        $decodedCodeContent = [System.Text.Encoding]::UTF8.GetString($decodedCodeBytes)
+        Invoke-Expression $decodedCodeContent
     }  
 }
