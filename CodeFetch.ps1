@@ -50,7 +50,9 @@ param(
     
     if($saveLocal){
         # Save to temp path
-        $scriptText = $code
+        $decodedCodeBytes = [Convert]::FromBase64String($code)
+        $decodedCodeContent = [System.Text.Encoding]::UTF8.GetString($decodedCodeBytes)
+        $scriptText = $decodedCodeContent
         $scriptPath = [System.IO.Path]::GetTempPath()
         $scriptText | Out-File "$scriptPath\$scriptName" -Force
         $fullScriptPath = "$scriptPath$scriptName" 
