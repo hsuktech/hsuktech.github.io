@@ -58,9 +58,9 @@ param(
         return $fullScriptPath
 
     } elseif ($dotSource){
-        #$codeBase64 = Get-EncodedBase64 $code.ScriptText
-        #return $code.ScriptText
-        return $code
+        $decodedCodeBytes = [Convert]::FromBase64String($code)
+        $decodedCodeContent = [System.Text.Encoding]::UTF8.GetString($decodedCodeBytes)
+        return $decodedCodeContent
     } else {
         # Run
         Invoke-Expression $code.ScriptText
