@@ -50,7 +50,7 @@ param(
     
     if($saveLocal){
         # Save to temp path
-        $scriptText = $code.ScriptText
+        $scriptText = $code
         $scriptPath = [System.IO.Path]::GetTempPath()
         $scriptText | Out-File "$scriptPath\$scriptName" -Force
         $fullScriptPath = "$scriptPath$scriptName" 
