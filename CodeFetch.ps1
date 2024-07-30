@@ -73,8 +73,8 @@ param(
         return $fullScriptPath
 
     } elseif ($dotSource){
-        $codeBase64 = Get-EncodedBase64 $code.ScriptText
-        return $codeBase64
+        #$codeBase64 = Get-EncodedBase64 $code.ScriptText
+        return $code.ScriptText
     } else {
         # Run
         Invoke-Expression $code.ScriptText
