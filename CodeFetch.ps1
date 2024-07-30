@@ -1,14 +1,3 @@
-# Encode a string to Base64
-function Get-EncodedBase64 {
-    param (
-        [string]$text
-    )
-
-    $bytes = [System.Text.Encoding]::Unicode.GetBytes($Text)
-    $encodedText =[Convert]::ToBase64String($Bytes)
-    return $encodedText
-}
-
 function CodeFetch {
 param(
     [Parameter(Position=0, Mandatory=$true)]
@@ -74,7 +63,8 @@ param(
 
     } elseif ($dotSource){
         #$codeBase64 = Get-EncodedBase64 $code.ScriptText
-        return $code.ScriptText
+        #return $code.ScriptText
+        return $code
     } else {
         # Run
         Invoke-Expression $code.ScriptText
