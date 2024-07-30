@@ -16,6 +16,10 @@ param(
     [switch]$dotSource
     )
 
+
+    $codeFetchUri
+    $sharedSecret
+
     # Build JSON to send
     $body = @"
     {
