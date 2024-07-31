@@ -1,4 +1,8 @@
-if(Test-Path variable:global:webhookUri){
+# Load CodeFetch
+iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch.ps1)
+
+# Test for CodeFetch variables
+if(Test-Path variable:global:codeFetchUri){
     # Do nothing
 } else { 
     $codeFetchUri = Read-Host "Code Fetch Uri"
