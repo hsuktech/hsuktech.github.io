@@ -31,6 +31,7 @@ param(
     }
     catch {
         Write-Host "Error with CodeFetch, please try again" -ForegroundColor Red
+        Exit
     }
 
     #$result
