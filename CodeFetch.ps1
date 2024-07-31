@@ -30,7 +30,7 @@ param(
         -Headers @{'Content-Type' = 'application/json'} -Body $body -ErrorAction Stop
     }
     catch {
-        Write-Host "Error with CodeFetch, please try again"
+        Write-Host "Error with CodeFetch, please try again" -ForegroundColor Red
     }
 
     #$result
