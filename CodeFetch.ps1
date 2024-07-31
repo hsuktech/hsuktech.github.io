@@ -24,9 +24,14 @@ param(
     }
 "@
 
-    # Request webhook
-    $result = Invoke-WebRequest -Method Post -Uri "$codeFetchUri" `
-        -Headers @{'Content-Type' = 'application/json'} -Body $body
+    # Request webhook, exit if error
+    try {
+        $result = Invoke-WebRequest -Method Post -Uri "$codeFetchUri" `
+        -Headers @{'Content-Type' = 'application/json'} -Body $body -ErrorAction Stop
+    }
+    catch {
+        Write-Host "Error with CodeFetch, please try again"
+    }
 
     #$result
     $result = $result | ConvertFrom-Json
