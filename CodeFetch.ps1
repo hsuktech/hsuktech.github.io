@@ -60,6 +60,7 @@ param(
         $decodedCodeContent = [System.Text.Encoding]::UTF8.GetString($decodedCodeBytes)
         $scriptText = $decodedCodeContent
         $scriptPath = [System.IO.Path]::GetTempPath()
+        $scriptName = Split-Path $scriptName -Leaf
         $scriptText | Out-File "$scriptPath\$scriptName" -Force
         $fullScriptPath = "$scriptPath$scriptName" 
 
