@@ -26,3 +26,14 @@ iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/Code
 ```
 iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetchPsProfile.ps1)
 ```
+
+### Windows Context Menu
+
+#### Add/Remove
+
+```
+iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch-WindowsContextMenuSetup.ps1)
+```
+
+#### Reset
+

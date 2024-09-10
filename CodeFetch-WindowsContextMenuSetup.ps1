@@ -1,10 +1,10 @@
 # URLs for the respective .reg files
-$addRegFileUrl = "https://example.com/path/to/AddGetCodeFetchCommandContextMenu.reg"  # Replace with actual URL for adding
-$removeRegFileUrl = "https://example.com/path/to/RemoveGetCodeFetchCommandContextMenu.reg"  # Replace with actual URL for removing
+$addRegFileUrl = "https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch-WindowsContextMenuAdd.reg"
+$removeRegFileUrl = "https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch-WindowsContextMenuRemove.reg" 
 
 # Define local paths to save the downloaded .reg files
-$addRegFilePath = "$env:TEMP\AddGetCodeFetchCommandContextMenu.reg"
-$removeRegFilePath = "$env:TEMP\RemoveGetCodeFetchCommandContextMenu.reg"
+$addRegFilePath = "$env:TEMP\CodeFetch-WindowsContextMenuAdd.reg"
+$removeRegFilePath = "$env:TEMP\CodeFetch-WindowsContextMenuRemove.reg"
 
 # Function to download and apply a .reg file
 function DownloadAndApplyRegFile {
