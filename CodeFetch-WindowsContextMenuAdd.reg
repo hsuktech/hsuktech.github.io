@@ -1,15 +1,15 @@
 Windows Registry Editor Version 5.00
 
 ; Context menu for all file types
-[HKEY_CLASSES_ROOT\*\shell\CodeFetch]
-@="Get CodeFetch Command"
+[HKEY_CLASSES_ROOT\*\shell\CodeFetchWithFunction]
+@="CodeFetch (Full)"
 
-[HKEY_CLASSES_ROOT\*\shell\CodeFetch\command1]
+[HKEY_CLASSES_ROOT\*\shell\CodeFetchWithFunction\command]
 @="cmd /c powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"& {Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch-WindowsContextMenu.ps1' -OutFile $env:TEMP\\CodeFetch-WindowsContextMenu.ps1; & $env:TEMP\\CodeFetch-WindowsContextMenu.ps1 '%1' 1}\""
 
-[HKEY_CLASSES_ROOT\*\shell\CodeFetch]
-@="Get CodeFetch Command 2"
+[HKEY_CLASSES_ROOT\*\shell\CodeFetchWithoutFunction]
+@="CodeFetch (Command)"
 
-[HKEY_CLASSES_ROOT\*\shell\CodeFetch\command2]
+[HKEY_CLASSES_ROOT\*\shell\CodeFetchWithOutFunction\command]
 @="cmd /c powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"& {Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch-WindowsContextMenu.ps1' -OutFile $env:TEMP\\CodeFetch-WindowsContextMenu.ps1; & $env:TEMP\\CodeFetch-WindowsContextMenu.ps1 '%1' 2}\""
 
