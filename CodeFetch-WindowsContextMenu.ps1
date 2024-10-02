@@ -1,5 +1,6 @@
 param (
-    [string]$filePath
+    [string]$filePath,
+    [int]$commandType
 )
 
 # Function to get secure variable or prompt if not found, and store securely
@@ -47,10 +48,18 @@ $cfUri = Get-SecureVariableOrPrompt -VarName 'CF_URI' -PromptMessage 'Enter the 
 $bytes = [System.Text.Encoding]::UTF8.GetBytes($filePath)
 $encodedFilePath = [Convert]::ToBase64String($bytes)
 
-# Generate CodeFetch command with securely retrieved values and copy to clipboard
+# Get command type adn return the related command
+if($commandType -eq 1){
+# Generate CodeFetch command with the CodeFetch function
 $code = @"
 iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch.ps1); CodeFetch -scriptName "$encodedFilePath" -sharedSecret "$cfSharedSecret" -codeFetchUri "$cfUri"
 "@
+} elseif ($commandType -eq 2){
+# Generate CodeFetch command without the CodeFetch function
+$code = @"
+CodeFetch -scriptName "$encodedFilePath" -sharedSecret "$cfSharedSecret" -codeFetchUri "$cfUri"
+"@
+}
 
 # Copy the generated command to the clipboard
 Set-Clipboard -Value $code
