@@ -37,3 +37,7 @@ iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/Code
 
 #### Reset
 
+```
+iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch-WindowsContextMenuReset.ps1)
+```
+

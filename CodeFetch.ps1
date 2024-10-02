@@ -31,7 +31,7 @@ param(
     }
     catch {
         Write-Host "Error with CodeFetch, please try again" -ForegroundColor Red
-        Exit
+        # Exit
     }
 
     #$result
@@ -56,15 +56,32 @@ param(
     
     if($saveLocal){
         # Save to temp path
-        $decodedCodeBytes = [Convert]::FromBase64String($code)
-        $decodedCodeContent = [System.Text.Encoding]::UTF8.GetString($decodedCodeBytes)
-        $scriptText = $decodedCodeContent
-        $scriptPath = [System.IO.Path]::GetTempPath()
-        $scriptName = Split-Path $scriptName -Leaf
-        $scriptText | Out-File "$scriptPath\$scriptName" -Force
-        $fullScriptPath = "$scriptPath$scriptName" 
+        #$decodedCodeBytes = [Convert]::FromBase64String($code)
+        #$decodedCodeContent = [System.Text.Encoding]::UTF8.GetString($decodedCodeBytes)
+        #$scriptText = $decodedCodeContent
+        #$scriptPath = [System.IO.Path]::GetTempPath()
+        #$scriptName = Split-Path $scriptName -Leaf
+        #$scriptText | Out-File "$scriptPath\$scriptName" -Force
+        #$fullScriptPath = "$scriptPath$scriptName" 
 
-        return $fullScriptPath
+        #return $fullScriptPath
+
+        # Get code for script content
+        $code = [Convert]::FromBase64String($code)
+        $code = [System.Text.Encoding]::UTF8.GetString($code)
+        $scriptContent = $code
+
+        # Get script name
+        $scriptName = [Convert]::FromBase64String($scriptName)
+        $scriptName = [System.Text.Encoding]::UTF8.GetString($scriptName)
+        $scriptName = Split-Path $scriptName -Leaf
+
+        # Output to temp path
+        $scriptPath = [System.IO.Path]::GetTempPath()
+        $scriptContent | Out-File "$scriptPath\$scriptName" -Force
+        $scriptPath = "$scriptPath$scriptName" 
+
+        return $scriptPath
 
     } elseif ($dotSource){
         $decodedCodeBytes = [Convert]::FromBase64String($code)
