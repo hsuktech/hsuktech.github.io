@@ -62,7 +62,7 @@ CodeFetch -scriptName "$encodedFilePath" -sharedSecret "$cfSharedSecret" -codeFe
 } elseif ($commandType -eq 3){
 # Generate CodeFetch command without the CodeFetch function
 $code = @"
-iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/refs/heads/main/CodeFetch-RunAsSystem.ps1);iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch.ps1); $scriptPath = CodeFetch -scriptName "$encodedFilePath" -sharedSecret "$cfSharedSecret" -codeFetchUri "$cfUri" -saveLocal; CodeFetch-RunAsSystem -filePath $scriptPath
+iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/refs/heads/main/CodeFetch-RunAsSystem.ps1);iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch.ps1); `$scriptPath = CodeFetch -scriptName "$encodedFilePath" -sharedSecret "$cfSharedSecret" -codeFetchUri "$cfUri" -saveLocal; CodeFetch-RunAsSystem -filePath $scriptPath
 "@
 }
 
