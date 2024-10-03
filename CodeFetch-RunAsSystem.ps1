@@ -7,9 +7,9 @@ function CodeFetch-RunAsSystem {
     # Define the download URL for PsExec
     $psexecUrl = "https://download.sysinternals.com/files/PSTools.zip"
     $tempFolder = [System.IO.Path]::GetTempPath()
-    $tempFolder = "$tempFolder\CodeFetch\PSTools"
-    $zipFile = "$tempFolder\CodeFetch\PSTools.zip"
-    $psexecPath = "$tempFolder\PsExec.exe"
+    $tempFolder = "$tempFolder"+"CodeFetch"
+    $zipFile = "$tempFolder\PSTools.zip"
+    $psexecPath = "$tempFolder\PSTools\PsExec.exe"
 
     # Automatically accept the PsExec EULA by adding the registry key
     $eulaKey = "HKCU:\Software\Sysinternals\PsExec"
@@ -31,7 +31,7 @@ function CodeFetch-RunAsSystem {
     # Extract the zip file
     Write-Output "Extracting PsExec..."
     Add-Type -AssemblyName System.IO.Compression.FileSystem
-    [System.IO.Compression.ZipFile]::ExtractToDirectory($zipFile, $tempFolder)
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($zipFile, "$tempFolder\PSTools")
 
     # Run PsExec as SYSTEM
     Write-Output "Running PsExec as SYSTEM..."
@@ -44,9 +44,8 @@ function CodeFetch-RunAsSystem {
 
     # Clean up: delete the PsExec files and temporary folder
     Write-Output "Cleaning up PsExec files..."
-    #Remove-Item -Path $psexecPath -Force
     Remove-Item -Path $zipFile -Force
-    Remove-Item -Path $tempFolder -Recurse -Force
+    Remove-Item -Path "$tempFolder\PSTools" -Recurse -Force
 
     Write-Output "PsExec has been deleted. All tasks complete."
 }
