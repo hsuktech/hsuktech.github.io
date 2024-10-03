@@ -86,7 +86,7 @@ param(
         }
 
         $scriptContent | Out-File "$scriptPath\$scriptName" -Force
-        $scriptPath = "$scriptPath$scriptName" 
+        $scriptPath = "$scriptPath\$scriptName" 
 
         return $scriptPath
 
