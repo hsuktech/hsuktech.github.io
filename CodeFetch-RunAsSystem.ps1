@@ -7,8 +7,8 @@ function CodeFetch-RunAsSystem {
     # Define the download URL for PsExec
     $psexecUrl = "https://download.sysinternals.com/files/PSTools.zip"
     $tempFolder = [System.IO.Path]::GetTempPath()
-    $tempFolder = "$tempFolder\PSTools"
-    $zipFile = "$tempFolder\PSTools.zip"
+    $tempFolder = "$tempFolder\CodeFetch\PSTools"
+    $zipFile = "$tempFolder\CodeFetch\PSTools.zip"
     $psexecPath = "$tempFolder\PsExec.exe"
 
     # Automatically accept the PsExec EULA by adding the registry key

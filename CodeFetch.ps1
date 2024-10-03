@@ -78,6 +78,7 @@ param(
 
         # Output to temp path
         $scriptPath = [System.IO.Path]::GetTempPath()
+        $scriptPath = "$scriptPath\CodeFetch"
         $scriptContent | Out-File "$scriptPath\$scriptName" -Force
         $scriptPath = "$scriptPath$scriptName" 
 
