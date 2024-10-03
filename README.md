@@ -41,3 +41,9 @@ iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/Code
 iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch-WindowsContextMenuReset.ps1)
 ```
 
+### Run As SYSTEM
+
+```
+iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/refs/heads/main/CodeFetch-RunAsSystem.ps1)
+```
+

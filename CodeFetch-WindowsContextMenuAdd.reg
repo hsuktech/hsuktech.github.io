@@ -13,3 +13,8 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\*\shell\CodeFetchWithOutFunction\command]
 @="cmd /c powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"& {Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch-WindowsContextMenu.ps1' -OutFile $env:TEMP\\CodeFetch-WindowsContextMenu.ps1; & $env:TEMP\\CodeFetch-WindowsContextMenu.ps1 '%1' 2}\""
 
+[HKEY_CLASSES_ROOT\*\shell\CodeFetchWithFunctionAsSystem]
+@="CodeFetch (Full as SYSTEM)"
+
+[HKEY_CLASSES_ROOT\*\shell\CodeFetchWithFunctionAsSystem\command]
+@="cmd /c powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"& {Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch-WindowsContextMenu.ps1' -OutFile $env:TEMP\\CodeFetch-WindowsContextMenu.ps1; & $env:TEMP\\CodeFetch-WindowsContextMenu.ps1 '%1' 3}\""
