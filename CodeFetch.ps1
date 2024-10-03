@@ -78,7 +78,7 @@ param(
 
         # Output to temp path
         $scriptPath = [System.IO.Path]::GetTempPath()
-        $scriptPath = "$scriptPath\CodeFetch"
+        $scriptPath = $scriptPath+"CodeFetch"
 
         # Create folder if it doesn't exist
         if (-not (Test-Path $scriptPath)) {
