@@ -43,9 +43,10 @@ function CodeFetch-RunAsSystem {
     # Wait for the SYSTEM command prompt or PowerShell session to close
 
     # Clean up: delete the PsExec files and temporary folder
-    Write-Output "Cleaning up PsExec files..."
+    Write-Output "Cleaning up files..."
+    Remove-Item -Path $filePath -Force
     Remove-Item -Path $zipFile -Force
     Remove-Item -Path "$tempFolder\PSTools" -Recurse -Force
 
-    Write-Output "PsExec has been deleted. All tasks complete."
+    Write-Output "All files have been deleted. All tasks complete."
 }
