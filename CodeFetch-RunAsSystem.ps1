@@ -7,6 +7,7 @@ function CodeFetch-RunAsSystem {
     # Define the download URL for PsExec
     $psexecUrl = "https://download.sysinternals.com/files/PSTools.zip"
     $tempFolder = [System.IO.Path]::GetTempPath()
+    $tempFolder = "$tempFolder\PSTools"
     $zipFile = "$tempFolder\PSTools.zip"
     $psexecPath = "$tempFolder\PsExec.exe"
 
@@ -43,7 +44,7 @@ function CodeFetch-RunAsSystem {
 
     # Clean up: delete the PsExec files and temporary folder
     Write-Output "Cleaning up PsExec files..."
-    Remove-Item -Path $psexecPath -Force
+    #Remove-Item -Path $psexecPath -Force
     Remove-Item -Path $zipFile -Force
     Remove-Item -Path $tempFolder -Recurse -Force
 
