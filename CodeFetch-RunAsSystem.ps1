@@ -1,7 +1,7 @@
 function CodeFetch-RunAsSystem {
     param(
         [Parameter(Position=0, Mandatory=$true)]
-        [string[]] $filePath
+        [string[]] $scriptPath
         )
 
     # Define the download URL for PsExec
@@ -38,13 +38,13 @@ function CodeFetch-RunAsSystem {
     #Start-Process -FilePath "$psexecPath" -ArgumentList "-accepteula -i -s cmd.exe" -Wait
 
     # Alternatively, to run PowerShell as SYSTEM, use this:
-    Start-Process -FilePath "$psexecPath" -ArgumentList "-accepteula", "-i", "-s", "powershell.exe", "-ExecutionPolicy", "Bypass", "-File", "$filePath" -Wait
+    Start-Process -FilePath "$psexecPath" -ArgumentList "-accepteula", "-i", "-s", "powershell.exe", "-ExecutionPolicy", "Bypass", "-File", "$scriptPath" -Wait
 
     # Wait for the SYSTEM command prompt or PowerShell session to close
 
     # Clean up: delete the PsExec files and temporary folder
     Write-Output "Cleaning up files..."
-    Remove-Item -Path $filePath -Force
+    Remove-Item -Path $scriptPath -Force
     Remove-Item -Path $zipFile -Force
     Remove-Item -Path "$tempFolder\PSTools" -Recurse -Force
 
