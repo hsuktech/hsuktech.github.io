@@ -64,6 +64,11 @@ CodeFetch -scriptName "$encodedFilePath" -sharedSecret "$cfSharedSecret" -codeFe
 $code = @"
 iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/refs/heads/main/CodeFetch-RunAsSystem.ps1);iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch.ps1); `$scriptPath = CodeFetch -scriptName "$encodedFilePath" -sharedSecret "$cfSharedSecret" -codeFetchUri "$cfUri" -saveLocal; CodeFetch-RunAsSystem -scriptPath `$scriptPath
 "@
+} elseif ($commandType -eq 4){
+# Copy script file path to clipboard
+$code = @"
+$encodedFilePath
+"@
 }
 
 # Copy the generated command to the clipboard
