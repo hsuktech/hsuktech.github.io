@@ -22,5 +22,5 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\*\shell\CodeFetchScriptFilePath]
 @="CodeFetch (Script File Path)"
 
-[HKEY_CLASSES_ROOT\*\shell\CodeFetchWithFunctionAsSystem\command]
+[HKEY_CLASSES_ROOT\*\shell\CodeFetchScriptFilePath\command]
 @="cmd /c powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"& {Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch-WindowsContextMenu.ps1' -OutFile $env:TEMP\\CodeFetch-WindowsContextMenu.ps1; & $env:TEMP\\CodeFetch-WindowsContextMenu.ps1 '%1' 4}\""
