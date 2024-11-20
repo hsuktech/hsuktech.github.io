@@ -96,5 +96,3 @@ function Invoke-DataRelayApiEndpoint {
         throw "Failed to invoke API endpoint: $_"
     }
 }
-
-Export-ModuleMember -Function Get-DataRelayApiAuthToken, Invoke-DataRelayApiEndpoint
