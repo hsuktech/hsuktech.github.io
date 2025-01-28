@@ -10,6 +10,8 @@ To use the CodeFetch.ps1 function in several ways.
 iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch.ps1);CodeFetch -scriptName "<VALID SCRIPT NAME>" -sharedSecret "<VALID SECRET>" -codeFetchUri "<VALID WEBHOOK>"
 
 iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch.ps1);$codeFetchUri = Read-Host "Please enter URI";$sharedSecret = Read-Host "Please enter secret";CodeFetch -scriptName "Tester.ps1" -sharedSecret "$sharedSecret" -codeFetchUri "$codeFetchUri"
+
+iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetchApi.ps1)
 ```
 
 > NOTE: You can use the -saveLocal switch to save the file to the user's temp path [System.IO.Path]::GetTempPath()
