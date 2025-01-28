@@ -7,7 +7,7 @@ param(
     [switch]$saveLocal,
 
     [Parameter(Position=2, Mandatory=$false)]
-    [switch]$dotSource
+    [switch]$dotSource,
 
     [Parameter(Position=3, Mandatory=$false)]
     [switch]$reset
