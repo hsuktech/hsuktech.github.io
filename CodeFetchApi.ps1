@@ -15,7 +15,7 @@ param(
 
     # Reset sharedSecret
     if($reset){
-        Remove-Item $env:CF_SHARED_SECRET
+        Remove-Item ENV:CF_SHARED_SECRET
     } else {
         # Do nothing
     }
