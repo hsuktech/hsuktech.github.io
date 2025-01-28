@@ -3,16 +3,22 @@ param(
     [Parameter(Position=0, Mandatory=$true)]
     [string[]] $script,
 
-    #[Parameter(Position=1, Mandatory=$true)]
-    #[string[]] $sharedSecret,
-
-    [Parameter(Position=3, Mandatory=$false)]
+    [Parameter(Position=1, Mandatory=$false)]
     [switch]$saveLocal,
 
-    [Parameter(Position=4, Mandatory=$false)]
+    [Parameter(Position=2, Mandatory=$false)]
     [switch]$dotSource
+
+    [Parameter(Position=3, Mandatory=$false)]
+    [switch]$reset
     )
 
+    # Reset sharedSecret
+    if($reset){) {
+        Remove-Item $env:CF_SHARED_SECRET
+    } else {
+        # Do nothing
+    }
 
     # Check that the sharedSecret token exists
     if($env:CF_SHARED_SECRET -eq $null) {
