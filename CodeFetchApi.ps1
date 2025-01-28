@@ -3,11 +3,8 @@ param(
     [Parameter(Position=0, Mandatory=$true)]
     [string[]] $script,
 
-    [Parameter(Position=1, Mandatory=$true)]
-    [string[]] $sharedSecret,
-
-    [Parameter(Position=2, Mandatory=$true)]
-    [string[]] $codeFetchUri,
+    #[Parameter(Position=1, Mandatory=$true)]
+    #[string[]] $sharedSecret,
 
     [Parameter(Position=3, Mandatory=$false)]
     [switch]$saveLocal,
@@ -16,57 +13,31 @@ param(
     [switch]$dotSource
     )
 
+
+    # Check that the sharedSecret token exists
+    if($env:CF_SHARED_SECRET -eq $null) {
+        Write-Output "Please add the environment variable for the Shared Secret"
+        $env:CF_SHARED_SECRET = Read-Host "Enter Shared Secret"
+    } else {
+        # Do nothing
+    }
+
     # Build JSON to send
     $body = @"
     {
-        "sharedSecret": "$sharedSecret", 
-        "script": "$script",
-        "taskName": "GetCode"
+        "sharedSecret": "$env:CF_SHARED_SECRET", 
+        "script": "$script"
     }
 "@
 
     # Request webhook, exit if error
     try {
-        $result = Invoke-WebRequest -Method Post -Uri "$codeFetchUri" `
+        $result = Invoke-WebRequest -Method Post -Uri "https://api.datarelay.io/api:Ls7M8AB3/codefetch/get-code" `
         -Headers @{'Content-Type' = 'application/json'} -Body $body -ErrorAction Stop
-    }
-    catch {
-        Write-Host "Error with CodeFetch, please try again" -ForegroundColor Red
-        # Exit
-    }
 
-    #$result
-    $result = $result | ConvertFrom-Json
-    $url = $result.resultUrl
-
-    # Loop until status is complete
-    do {
-        $response = Invoke-WebRequest -Uri $url -Method Get -MaximumRedirection 0
-        $status = ($response.Content | ConvertFrom-Json).status
-        if($status -ne "Completed"){
-            continue
-        }
-        else{
-            break
-        }
-    } while ($true)
-
-    # Get result
-    $response = $response.Content | ConvertFrom-Json
-
-
-    #$code = $response.data.results.tasks[2].result 
-
-    $checkSecret = $response.data.results.tasks | Where-Object { $_.name -eq "Check-Secret" }
-    
-    if($checkSecret.result -eq $true){
-        $code = ($response.data.results.tasks | Where-Object { $_.name -eq "Get-Code" }).result
-
-        # Exit if script not found
-        if($code -eq $false){
-            Return "Script not found!"
-            exit
-        }
+        #$result
+        $result = $result | ConvertFrom-Json
+        $code = $result.code
 
         if($saveLocal){
 
@@ -113,8 +84,9 @@ param(
             $decodedCodeContent = [System.Text.Encoding]::UTF8.GetString($decodedCodeBytes)
             Invoke-Expression $decodedCodeContent
         }  
-    } else {
-        return "Secret is invalid!"
     }
-    
+    catch {
+        Write-Host "Error with CodeFetch, please try again" -ForegroundColor Red
+    }
+  
 }
