@@ -38,6 +38,7 @@ param(
 
     # Request webhook, exit if error
     try {
+        Write-Host "Fetching code..." -ForegroundColor Green
         $result = Invoke-WebRequest -Method Post -Uri "https://api.datarelay.io/api:Ls7M8AB3/codefetch/core/get-code" `
         -Headers @{'Content-Type' = 'application/json'} -Body $body -ErrorAction Stop
 
