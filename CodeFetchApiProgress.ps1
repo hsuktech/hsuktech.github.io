@@ -7,11 +7,20 @@ param(
     [switch]$saveLocal,
 
     [Parameter(Position=2, Mandatory=$false)]
-    [switch]$dotSource,
+    [string]$type,
 
     [Parameter(Position=3, Mandatory=$false)]
+    [switch]$dotSource,
+
+    [Parameter(Position=4, Mandatory=$false)]
     [switch]$reset
     )
+
+    # If saveLocal is set then require type
+    if ($saveLocal -and -not $type) {
+        Write-Host "ERROR: The -type (ps1, py, sh) parameter is required when using -saveLocal" -ForegroundColor Red
+        return
+    }
 
     # Reset sharedSecret
     if($reset){
@@ -38,7 +47,9 @@ param(
 
     # Request webhook, exit if error
     try {
-        $timeout = 30  # Max wait time in seconds
+        Clear-Host
+
+        $timeout = 30  # Max w  ait time in seconds
 
         # Start Web Request in a Background Job
         $job = Start-Job -ScriptBlock {
@@ -85,23 +96,14 @@ param(
 
         if($saveLocal){
 
+            # TODO: Is there a better way to get the file extension on saveLocal #codefetch
+
             # Get code for script content
             $code = [Convert]::FromBase64String($code)
             $code = [System.Text.Encoding]::UTF8.GetString($code)
             $scriptContent = $code
 
-            $scriptContent
-            $script
-
-            # Get script
-            Try{
-                $decodedBytes = [Convert]::FromBase64String($script)
-                $script = [System.Text.Encoding]::UTF8.GetString($decodedBytes)
-            }catch{
-                # Do nothing if name is not base64 encoded
-            }  
-
-            $scriptName = Split-Path $script -Leaf
+            $scriptName = "$script.$type"    
 
             # Output to temp path
             $scriptPath = [System.IO.Path]::GetTempPath()
