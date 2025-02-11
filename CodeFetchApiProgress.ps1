@@ -38,10 +38,48 @@ param(
 
     # Request webhook, exit if error
     try {
-        $result = Invoke-WebRequest -Method Post -Uri "https://api.datarelay.io/api:Ls7M8AB3/codefetch/core/get-code" `
-        -Headers @{'Content-Type' = 'application/json'} -Body $body -ErrorAction Stop
+        $timeout = 30  # Max wait time in seconds
 
-        #$result
+        # Start Web Request in a Background Job
+        $job = Start-Job -ScriptBlock {
+            param ($body)
+            Invoke-WebRequest -Method Post -Uri "https://api.datarelay.io/api:Ls7M8AB3/codefetch/core/get-code" -Headers @{'Content-Type' = 'application/json'} -Body $body -ErrorAction Stop
+        } -ArgumentList $body
+
+        # Progress Bar While Waiting
+        $elapsed = 0
+        while ($true) {
+            $percentComplete = ($elapsed / $timeout) * 100
+            Write-Progress -Activity "Processing..." -Status "Elapsed: $elapsed sec" -PercentComplete $percentComplete
+
+            # Check if Job is Failed
+            if (Get-Job -Id $job.Id | Where-Object { $_.State -eq 'Failed' }) {
+                Write-Progress -Activity "Processing..." -Completed
+                break
+            }
+
+            # Check if Job is Completed
+            if (Get-Job -Id $job.Id | Where-Object { $_.State -eq 'Completed' }) {
+                Write-Progress -Activity "Processing..." -Completed
+                break
+            }
+
+            Start-Sleep -Seconds 1
+            $elapsed++
+
+            # Timeout Condition
+            if ($elapsed -ge $timeout) {
+                Stop-Job -Id $job.Id
+                Remove-Job -Id $job.Id
+                Write-Host "Timed out!"
+                #exit
+            }
+        }
+
+        # Retrieve Job Output
+        $result = Receive-Job -Id $job.Id
+        Remove-Job -Id $job.Id
+
         $result = $result | ConvertFrom-Json
         $code = $result.code
 
