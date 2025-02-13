@@ -77,7 +77,7 @@ function Process-Repo {
 
     # Index path
     $indexFile = "cf_index.json"
-    Remove-Item -Force $indexFile
+    Remove-Item -Force $indexFile -ErrorAction SilentlyContinue
 
     # Metadata index
     $indexJson = @()
