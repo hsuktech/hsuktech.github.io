@@ -16,7 +16,7 @@ param(
     [switch]$dotSource
 
     [Parameter(Position=5, Mandatory=$false)]
-    [switch]$RunAsSystem
+    [switch]$system
     )
 
     # Build JSON to send
@@ -72,7 +72,7 @@ param(
         $decodedCodeBytes = [Convert]::FromBase64String($code)
         $decodedCodeContent = [System.Text.Encoding]::UTF8.GetString($decodedCodeBytes)
         return $decodedCodeContent
-    } elseif ($RunAsSystem){
+    } elseif ($system){
         
     } else {
         # Run
