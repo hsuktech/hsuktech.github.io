@@ -83,4 +83,5 @@ param(
     }  
 }
 
+# iex (irm https://raw.githubusercontent.com/hsuktech/hsuktech.github.io/main/CodeFetch-Internal.ps1)   
 # TODO: Add a function to run the script as SYSTEM
