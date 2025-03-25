@@ -14,6 +14,9 @@ param(
 
     [Parameter(Position=4, Mandatory=$false)]
     [switch]$dotSource
+
+    [Parameter(Position=5, Mandatory=$false)]
+    [switch]$RunAsSystem
     )
 
     # Build JSON to send
@@ -69,6 +72,8 @@ param(
         $decodedCodeBytes = [Convert]::FromBase64String($code)
         $decodedCodeContent = [System.Text.Encoding]::UTF8.GetString($decodedCodeBytes)
         return $decodedCodeContent
+    } elseif ($RunAsSystem){
+        
     } else {
         # Run
         $decodedCodeBytes = [Convert]::FromBase64String($code)
@@ -77,3 +82,5 @@ param(
         Invoke-Expression $decodedCodeContent
     }  
 }
+
+# TODO: Add a function to run the script as SYSTEM
