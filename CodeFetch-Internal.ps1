@@ -13,7 +13,7 @@ param(
     [switch]$saveLocal,
 
     [Parameter(Position=4, Mandatory=$false)]
-    [switch]$dotSource
+    [switch]$dotSource,
 
     [Parameter(Position=5, Mandatory=$false)]
     [switch]$system
